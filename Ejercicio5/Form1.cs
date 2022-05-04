@@ -17,5 +17,19 @@ namespace Ejercicio5
             InitializeComponent();
         }
 
+        private void bGestionCursos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bGestionAlumnos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bGestionProfesores_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
