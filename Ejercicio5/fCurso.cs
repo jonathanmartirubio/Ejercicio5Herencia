@@ -19,7 +19,7 @@ namespace Ejercicio5
         }
 
         public tListadeCursos Cursos;
-        public tListaAlumnos Alumnos;
+        public tListaPersonas Personas;
 
         private void bAnyadirCurso_Click(object sender, EventArgs e)
         {

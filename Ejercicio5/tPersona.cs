@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ejercicio5
 {
-    abstract class tPersona
+    public abstract class tPersona
     {
         private string mDni;
         private string mNombre;
@@ -35,6 +35,17 @@ namespace Ejercicio5
             mDni = dni;
             mNombre = nombre;
             mTelefono = telf;
+        }
+
+        public virtual string MostrarDatos()
+        {
+            string texto;
+
+            texto = "Nombre: " + mNombre + "\n";
+            texto += "Dni: " + mDni + "\n";
+            texto += "Telf: " + mTelefono + "\n";
+
+            return texto;
         }
     }
 }
