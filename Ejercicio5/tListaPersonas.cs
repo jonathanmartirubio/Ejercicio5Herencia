@@ -356,5 +356,67 @@ namespace Ejercicio5
 
             return hayalumnos;
         }
+
+        public bool AnyadirAsignatura(string nombre, string asignatura)
+        {
+            int pos;
+            tProfesor profesor;
+            bool encontrado = false;
+
+            pos = Buscar(nombre);
+            if (pos >= 0)
+            {
+                profesor = (tProfesor)mListaProfesores[pos];
+                profesor.AnyadirAsignatura(asignatura);
+                encontrado = true;
+            }
+            return encontrado;
+        }
+
+        public string MostrarProfesoresPorAsignatura(string asignatura)
+        {
+            string texto;
+            bool correcto;
+            tProfesor profesor;
+
+            texto = "";
+            profesor = (tProfesor)mListaProfesores[0];
+            correcto = profesor.ImparteAsignatura(asignatura);
+
+            for (int i = 0; i < mListaProfesores.Count; i++)
+            {
+                profesor = (tProfesor)mListaProfesores[i];
+
+                if (correcto)
+                {
+                    texto += profesor.MostrarDatos();
+                }
+                else
+                {
+                    texto += "Ningún profesor imparte esa asignatura.";
+                }
+            }
+
+            return texto;
+        }
+
+        public bool EliminarAsignaturas(string nombre)
+        {
+            bool encontrado;
+            int pos;
+            tProfesor profesor;
+
+            encontrado = false;
+            pos = Buscar(nombre);
+
+            if (pos >= 0)
+            {
+                profesor = (tProfesor)mListaProfesores[pos];
+                profesor.EliminarAsignaturas();
+                encontrado = true;
+            }
+
+            return encontrado;
+        }
     }
 }

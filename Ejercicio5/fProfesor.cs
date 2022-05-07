@@ -13,15 +13,15 @@ namespace Ejercicio5
 {
     public partial class fProfesor : Form
     {
-        public fProfesor(tListaPersonas Personas, tListadeCursos Cursos)
+        public fProfesor(tListaPersonas Instituto, tListadeCursos Cursos)
         {
             InitializeComponent();
 
-            this.Personas = Personas;
+            this.Instituto = Instituto;
             this.Cursos = Cursos;
         }
 
-        private tListaPersonas Personas;
+        private tListaPersonas Instituto;
         private tListadeCursos Cursos;
 
         private void bAnyadirProfesor_Click(object sender, EventArgs e)
@@ -48,14 +48,14 @@ namespace Ejercicio5
                 }
                 else
                 {
-                    Personas.AnyadirProfesor(dni, nombre, telf, email, tutor, curso);
+                    Instituto.AnyadirProfesor(dni, nombre, telf, email, tutor, curso);
                 }
             }
             else
             {
                 tutor = false;
                 curso = 0;
-                Personas.AnyadirProfesor(dni, nombre, telf, email, tutor, curso);
+                Instituto.AnyadirProfesor(dni, nombre, telf, email, tutor, curso);
             }
             
         }
@@ -66,7 +66,7 @@ namespace Ejercicio5
             bool correcto;
 
             nombre = Interaction.InputBox("Introduzca el nombre:", "Eliminar Profesor");
-            correcto = Personas.Eliminar(nombre);
+            correcto = Instituto.Eliminar(nombre);
 
             if (correcto)
             {
@@ -82,7 +82,7 @@ namespace Ejercicio5
         {
             string texto;
 
-            texto = Personas.MostrarProfesores();
+            texto = Instituto.MostrarProfesores();
 
             MessageBox.Show(texto);
         }
@@ -95,7 +95,7 @@ namespace Ejercicio5
             encontrado = false;
             nombre = Interaction.InputBox("Introduce el nombre:", "Mostrar datos de un Profesor");
 
-            texto = Personas.MostrarProfesor(nombre, ref encontrado);
+            texto = Instituto.MostrarProfesor(nombre, ref encontrado);
 
             if (encontrado)
             {
@@ -110,23 +110,53 @@ namespace Ejercicio5
 
         private void bOrdenAlfabetico_Click(object sender, EventArgs e)
         {
-            Personas.OrdenarProfesores();
+            Instituto.OrdenarProfesores();
             MessageBox.Show("Lista de Profesores ordenada alfabéticamente.");
         }
 
         private void bAnyadirAsignatura_Click(object sender, EventArgs e)
         {
+            string nombre, asignatura;
+            bool encontrado;
 
+            nombre = Interaction.InputBox("Introduce el nombre:", "Añadir asignatura a un profesor");
+            asignatura = Interaction.InputBox("Introduce la asignatura:", "Añadir asignatura a un profesor");
+
+            encontrado = Instituto.AnyadirAsignatura(nombre, asignatura);
+            if (encontrado)
+                MessageBox.Show("Se ha añadido correctamente la Asignatura.");
+            else
+                MessageBox.Show("No se ha encontrado el Profesor.");
         }
 
         private void bEliminarAsignaturas_Click(object sender, EventArgs e)
         {
+            string nombre;
+            bool encontrado;
 
+            nombre = Interaction.InputBox("Introduce el nombre", "Eliminar Notas");
+            encontrado = Instituto.EliminarAsignaturas(nombre);
+
+            if (encontrado)
+            {
+                MessageBox.Show("Asignaturas eliminadas correctamente.");
+            }
+            else
+            {
+                MessageBox.Show("No se ha encontrado el Profesor.");
+            }
         }
 
         private void bMostrarPorAsignatura_Click(object sender, EventArgs e)
         {
+            string texto;
+            string asignatura;
 
+            asignatura = Interaction.InputBox("Introduce la asignatura:", "Mostrar Profesores de una Asignatura");
+
+            texto = Instituto.MostrarProfesoresPorAsignatura(asignatura);
+
+            MessageBox.Show(texto);
         }
     }
 }

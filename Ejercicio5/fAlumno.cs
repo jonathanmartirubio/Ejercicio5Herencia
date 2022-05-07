@@ -13,15 +13,15 @@ namespace Ejercicio5
 {
     public partial class fAlumno : Form
     {
-        public fAlumno(tListaPersonas Personas, tListadeCursos Cursos)
+        public fAlumno(tListaPersonas Instituto, tListadeCursos Cursos)
         {
             InitializeComponent();
 
-            this.Personas = Personas;
+            this.Instituto = Instituto;
             this.Cursos = Cursos;
         }
 
-        private tListaPersonas Personas;
+        private tListaPersonas Instituto;
         private tListadeCursos Cursos;
 
         private void bAnyadirAlumno_Click(object sender, EventArgs e)
@@ -41,7 +41,7 @@ namespace Ejercicio5
             }
             else
             {
-                Personas.AnyadirAlumno(dni, nombre, telf, codigo);
+                Instituto.AnyadirAlumno(dni, nombre, telf, codigo);
             }
         }
 
@@ -51,7 +51,7 @@ namespace Ejercicio5
             bool correcto;
 
             nombre = Interaction.InputBox("Introduzca el nombre", "Eliminar Alumno");
-            correcto = Personas.Eliminar(nombre);
+            correcto = Instituto.Eliminar(nombre);
 
             if (correcto)
             {
@@ -67,14 +67,14 @@ namespace Ejercicio5
         {
             string texto;
 
-            texto = Personas.MostrarAlumnos();
+            texto = Instituto.MostrarAlumnos();
 
             MessageBox.Show(texto);
         }
 
         private void bOrdenAlfabetico_Click(object sender, EventArgs e)
         {
-            Personas.OrdenarAlumnos();
+            Instituto.OrdenarAlumnos();
             MessageBox.Show("Lista de Alumnos ordenada alfabéticamente.");
         }
 
@@ -84,7 +84,7 @@ namespace Ejercicio5
             bool correcto;
             correcto = false;
             nombre = Interaction.InputBox("Nombre del Alumno:", "Mostrar datos del alumno");
-            texto = Personas.MostrarAlumno(nombre, ref correcto);
+            texto = Instituto.MostrarAlumno(nombre, ref correcto);
 
             if (correcto)
             {
@@ -107,7 +107,7 @@ namespace Ejercicio5
 
             if (existecurso)
             {
-                texto = Personas.MostrarAlumnosPorCurso(codigo);
+                texto = Instituto.MostrarAlumnosPorCurso(codigo);
                 MessageBox.Show(texto);
             }
             else
@@ -126,7 +126,7 @@ namespace Ejercicio5
             nombre = Interaction.InputBox("Introduzca el nombre.");
             nota = double.Parse(Interaction.InputBox("Introduzca la Nota."));
 
-            correcto = Personas.AnyadirNota(nombre, nota);
+            correcto = Instituto.AnyadirNota(nombre, nota);
             if (correcto)
                 MessageBox.Show("Se ha añadido correctamente la nota.");
             else
@@ -139,15 +139,15 @@ namespace Ejercicio5
             bool correcto, tienenotas, existe;
 
             nombre = Interaction.InputBox("Introduce el nombre", "Eliminar Notas");
-            existe = Personas.ExisteAlumno(nombre);
+            existe = Instituto.ExisteAlumno(nombre);
 
             if (existe)
             {
-                tienenotas = Personas.TieneNotas(nombre);
+                tienenotas = Instituto.TieneNotas(nombre);
 
                 if (tienenotas)
                 {
-                    correcto = Personas.EliminarNotas(nombre);
+                    correcto = Instituto.EliminarNotas(nombre);
                     if (correcto)
                     {
                         MessageBox.Show("Notas eliminadas correctamente.");
@@ -172,7 +172,7 @@ namespace Ejercicio5
         {
             string texto;
 
-            texto = Personas.MostrarAlumnosMediaAprobado();
+            texto = Instituto.MostrarAlumnosMediaAprobado();
 
             MessageBox.Show(texto);
         }
@@ -181,7 +181,7 @@ namespace Ejercicio5
         {
             string texto;
 
-            texto = Personas.MostrarAlumnosMediaSuspenso();
+            texto = Instituto.MostrarAlumnosMediaSuspenso();
 
             MessageBox.Show(texto);
         }

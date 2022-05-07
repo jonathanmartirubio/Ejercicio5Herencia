@@ -17,12 +17,12 @@ namespace Ejercicio5
             InitializeComponent();
         }
 
-        tListaPersonas Personas = new tListaPersonas();
+        tListaPersonas Instituto = new tListaPersonas();
         tListadeCursos Cursos = new tListadeCursos();
 
         private void bGestionCursos_Click(object sender, EventArgs e)
         {
-            fCurso fCur = new fCurso(Personas, Cursos);
+            fCurso fCur = new fCurso(Instituto, Cursos);
 
             fCur.ShowDialog();
 
@@ -30,14 +30,14 @@ namespace Ejercicio5
 
         private void bGestionAlumnos_Click(object sender, EventArgs e)
         {
-            fAlumno fAlu = new fAlumno(Personas, Cursos);
+            fAlumno fAlu = new fAlumno(Instituto, Cursos);
 
             fAlu.ShowDialog();
         }
 
         private void bGestionProfesores_Click(object sender, EventArgs e)
         {
-            fProfesor fProf = new fProfesor(Personas, Cursos);
+            fProfesor fProf = new fProfesor(Instituto, Cursos);
 
             fProf.ShowDialog();
         }
