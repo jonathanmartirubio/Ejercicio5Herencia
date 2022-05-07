@@ -22,10 +22,7 @@ namespace Ejercicio5
 
         private void bGestionCursos_Click(object sender, EventArgs e)
         {
-            fCurso fCur = new fCurso();
-
-            fCur.Personas = Personas;
-            fCur.Cursos = Cursos;
+            fCurso fCur = new fCurso(Personas, Cursos);
 
             fCur.ShowDialog();
 
@@ -33,20 +30,14 @@ namespace Ejercicio5
 
         private void bGestionAlumnos_Click(object sender, EventArgs e)
         {
-            fAlumno fAlu = new fAlumno();
-
-            fAlu.Personas = Personas;
-            fAlu.Cursos = Cursos;
+            fAlumno fAlu = new fAlumno(Personas, Cursos);
 
             fAlu.ShowDialog();
         }
 
         private void bGestionProfesores_Click(object sender, EventArgs e)
         {
-            fProfesor fProf = new fProfesor();
-
-            fProf.Personas = Personas;
-            fProf.Cursos = Cursos;
+            fProfesor fProf = new fProfesor(Personas, Cursos);
 
             fProf.ShowDialog();
         }

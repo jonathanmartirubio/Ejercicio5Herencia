@@ -13,13 +13,16 @@ namespace Ejercicio5
 {
     public partial class fProfesor : Form
     {
-        public fProfesor()
+        public fProfesor(tListaPersonas Personas, tListadeCursos Cursos)
         {
             InitializeComponent();
+
+            this.Personas = Personas;
+            this.Cursos = Cursos;
         }
 
-        public tListaPersonas Personas;
-        public tListadeCursos Cursos;
+        private tListaPersonas Personas;
+        private tListadeCursos Cursos;
 
         private void bAnyadirProfesor_Click(object sender, EventArgs e)
         {
@@ -37,21 +40,24 @@ namespace Ejercicio5
             if (estutor == DialogResult.Yes)
             {
                 tutor = true;
+                curso = int.Parse(Interaction.InputBox("Introduce el código del curso en el que es tutor:", "Añadir Profesor"));
+                existecurso = Cursos.ExisteCurso(curso);
+                if (!existecurso)
+                {
+                    MessageBox.Show("El curso introducido no existe.");
+                }
+                else
+                {
+                    Personas.AnyadirProfesor(dni, nombre, telf, email, tutor, curso);
+                }
             }
             else
             {
                 tutor = false;
+                curso = 0;
+                Personas.AnyadirProfesor(dni, nombre, telf, email, tutor, curso);
             }
-            curso = int.Parse(Interaction.InputBox("Introduce el código del curso en el que es tutor:", "Añadir Profesor"));
-            existecurso = Cursos.ExisteCurso(curso);
-            if (!existecurso)
-            {
-                MessageBox.Show("El curso introducido no existe.");
-            }
-            else
-            {
-                Personas.AnyadirProfesor(nombre, dni, telf, email, tutor, curso);
-            }
+            
         }
 
         private void bEliminarProfesor_Click(object sender, EventArgs e)
@@ -60,7 +66,7 @@ namespace Ejercicio5
             bool correcto;
 
             nombre = Interaction.InputBox("Introduzca el nombre:", "Eliminar Profesor");
-            correcto = Profesores.EliminarProfesor(nombre);
+            correcto = Personas.Eliminar(nombre);
 
             if (correcto)
             {
@@ -76,7 +82,7 @@ namespace Ejercicio5
         {
             string texto;
 
-            texto = Profesores.MostrarProfesores();
+            texto = Personas.MostrarProfesores();
 
             MessageBox.Show(texto);
         }
@@ -89,7 +95,7 @@ namespace Ejercicio5
             encontrado = false;
             nombre = Interaction.InputBox("Introduce el nombre:", "Mostrar datos de un Profesor");
 
-            texto = Profesores.MostrarProfesor(nombre, ref encontrado);
+            texto = Personas.MostrarProfesor(nombre, ref encontrado);
 
             if (encontrado)
             {
@@ -104,53 +110,23 @@ namespace Ejercicio5
 
         private void bOrdenAlfabetico_Click(object sender, EventArgs e)
         {
-            Profesores.OrdenAlfabetico();
+            Personas.OrdenarProfesores();
+            MessageBox.Show("Lista de Profesores ordenada alfabéticamente.");
         }
 
         private void bAnyadirAsignatura_Click(object sender, EventArgs e)
         {
-            string nombre, asignatura;
-            bool encontrado;
-
-            nombre = Interaction.InputBox("Introduce el nombre:", "Añadir asignatura a un profesor");
-            asignatura = Interaction.InputBox("Introduce la asignatura:", "Añadir asignatura a un profesor");
-
-            encontrado = Profesores.AnyadirAsignatura(nombre, asignatura);
-            if (encontrado)
-                MessageBox.Show("Se ha añadido correctamente la Asignatura.");
-            else
-                MessageBox.Show("No se ha encontrado el Profesor.");
 
         }
 
         private void bEliminarAsignaturas_Click(object sender, EventArgs e)
         {
-            string nombre;
-            bool encontrado;
 
-            nombre = Interaction.InputBox("Introduce el nombre", "Eliminar Notas");
-            encontrado = Profesores.EliminarAsignaturas(nombre);
-
-            if (encontrado)
-            {
-                MessageBox.Show("Asignaturas eliminadas correctamente.");
-            }
-            else
-            {
-                MessageBox.Show("No se ha encontrado el Profesor.");
-            }
         }
 
         private void bMostrarPorAsignatura_Click(object sender, EventArgs e)
         {
-            string texto;
-            string asignatura;
 
-            asignatura = Interaction.InputBox("Introduce la asignatura:", "Mostrar Profesores de una Asignatura");
-
-            texto = Profesores.MostrarProfesoresPorAsignatura(asignatura);
-
-            MessageBox.Show(texto);
         }
     }
 }

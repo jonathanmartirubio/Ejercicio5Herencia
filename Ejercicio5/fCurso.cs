@@ -13,13 +13,16 @@ namespace Ejercicio5
 {
     public partial class fCurso : Form
     {
-        public fCurso()
+        public fCurso(tListaPersonas Personas, tListadeCursos Cursos)
         {
             InitializeComponent();
+
+            this.Personas = Personas;
+            this.Cursos = Cursos;
         }
 
-        public tListadeCursos Cursos;
-        public tListaPersonas Personas;
+        private tListadeCursos Cursos;
+        private tListaPersonas Personas;
 
         private void bAnyadirCurso_Click(object sender, EventArgs e)
         {
@@ -61,22 +64,6 @@ namespace Ejercicio5
 
         private void bMostrarAlumnosCurso_Click(object sender, EventArgs e)
         {
-            string texto;
-            bool existecurso;
-            int codigo;
-            codigo = int.Parse(Interaction.InputBox("Introduce el código del curso:", "Mostrar Alumnos por Curso"));
-            existecurso = Cursos.ExisteCurso(codigo);
-
-            if (existecurso)
-            {
-                texto = Alumnos.MostrarAlumnosPorCurso(codigo);
-                MessageBox.Show(texto);
-            }
-            else
-            {
-                texto = "No existe el curso introducido.";
-                MessageBox.Show(texto);
-            }
 
         }
     }

@@ -13,13 +13,16 @@ namespace Ejercicio5
 {
     public partial class fAlumno : Form
     {
-        public fAlumno()
+        public fAlumno(tListaPersonas Personas, tListadeCursos Cursos)
         {
             InitializeComponent();
+
+            this.Personas = Personas;
+            this.Cursos = Cursos;
         }
 
-        public tListaPersonas Personas;
-        public tListadeCursos Cursos;
+        private tListaPersonas Personas;
+        private tListadeCursos Cursos;
 
         private void bAnyadirAlumno_Click(object sender, EventArgs e)
         {
@@ -38,7 +41,7 @@ namespace Ejercicio5
             }
             else
             {
-                Personas.AnyadirAlumno(nombre, dni, telf, codigo);
+                Personas.AnyadirAlumno(dni, nombre, telf, codigo);
             }
         }
 
@@ -48,7 +51,7 @@ namespace Ejercicio5
             bool correcto;
 
             nombre = Interaction.InputBox("Introduzca el nombre", "Eliminar Alumno");
-            correcto = Alumnos.EliminarAlumno(nombre);
+            correcto = Personas.Eliminar(nombre);
 
             if (correcto)
             {
@@ -64,14 +67,15 @@ namespace Ejercicio5
         {
             string texto;
 
-            texto = Alumnos.MostrarAlumnos();
+            texto = Personas.MostrarAlumnos();
 
             MessageBox.Show(texto);
         }
 
         private void bOrdenAlfabetico_Click(object sender, EventArgs e)
         {
-            Alumnos.OrdenAlfabetico();
+            Personas.OrdenarAlumnos();
+            MessageBox.Show("Lista de Alumnos ordenada alfabéticamente.");
         }
 
         private void bMostrarAlumno_Click(object sender, EventArgs e)
@@ -80,7 +84,7 @@ namespace Ejercicio5
             bool correcto;
             correcto = false;
             nombre = Interaction.InputBox("Nombre del Alumno:", "Mostrar datos del alumno");
-            texto = Alumnos.MostrarAlumno(nombre, ref correcto);
+            texto = Personas.MostrarAlumno(nombre, ref correcto);
 
             if (correcto)
             {
@@ -103,7 +107,7 @@ namespace Ejercicio5
 
             if (existecurso)
             {
-                texto = Alumnos.MostrarAlumnosPorCurso(codigo);
+                texto = Personas.MostrarAlumnosPorCurso(codigo);
                 MessageBox.Show(texto);
             }
             else
@@ -122,7 +126,7 @@ namespace Ejercicio5
             nombre = Interaction.InputBox("Introduzca el nombre.");
             nota = double.Parse(Interaction.InputBox("Introduzca la Nota."));
 
-            correcto = Alumnos.AnyadirNota(nombre, nota);
+            correcto = Personas.AnyadirNota(nombre, nota);
             if (correcto)
                 MessageBox.Show("Se ha añadido correctamente la nota.");
             else
@@ -135,15 +139,15 @@ namespace Ejercicio5
             bool correcto, tienenotas, existe;
 
             nombre = Interaction.InputBox("Introduce el nombre", "Eliminar Notas");
-            existe = Alumnos.ExisteAlumno(nombre);
+            existe = Personas.ExisteAlumno(nombre);
 
             if (existe)
             {
-                tienenotas = Alumnos.TieneNotas(nombre);
+                tienenotas = Personas.TieneNotas(nombre);
 
                 if (tienenotas)
                 {
-                    correcto = Alumnos.EliminarNotas(nombre);
+                    correcto = Personas.EliminarNotas(nombre);
                     if (correcto)
                     {
                         MessageBox.Show("Notas eliminadas correctamente.");
@@ -162,15 +166,13 @@ namespace Ejercicio5
             {
                 MessageBox.Show("No existe el alumno introducido.");
             }
-
-
         }
 
         private void bAlumnosMediaAprobado_Click(object sender, EventArgs e)
         {
             string texto;
 
-            texto = Alumnos.MostrarAlumnosMediaAprobado();
+            texto = Personas.MostrarAlumnosMediaAprobado();
 
             MessageBox.Show(texto);
         }
@@ -179,7 +181,7 @@ namespace Ejercicio5
         {
             string texto;
 
-            texto = Alumnos.MostrarAlumnosMediaSuspenso();
+            texto = Personas.MostrarAlumnosMediaSuspenso();
 
             MessageBox.Show(texto);
         }
