@@ -81,6 +81,7 @@ namespace Ejercicio5
             this.bMostrarDatosProfesor.TabIndex = 3;
             this.bMostrarDatosProfesor.Text = "Mostrar datos de un Profesor";
             this.bMostrarDatosProfesor.UseVisualStyleBackColor = true;
+            this.bMostrarDatosProfesor.Click += new System.EventHandler(this.bMostrarDatosProfesor_Click);
             // 
             // bOrdenAlfabetico
             // 

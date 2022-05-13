@@ -80,7 +80,7 @@ namespace Ejercicio5
                 }
                 if (persona.GetType() == typeof(tAlumno))
                 {
-                    persona = mListaProfesores[i];
+                    persona = mListaAlumnos[i];
                     if (persona.Nombre == nombre)
                     {
                         pos = i;
